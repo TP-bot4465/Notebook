@@ -1,8 +1,3 @@
-Đây là phiên bản `README.md` chuẩn chỉnh bằng Tiếng Việt, sử dụng phong cách chuyên nghiệp (Engineering Standard), hạn chế tối đa các biểu tượng (icon) trang trí thừa thãi để tập trung vào tính kỹ thuật.
-
------
-
-````markdown
 # LangGraph Research Agent
 
 Một trợ lý nghiên cứu thông minh được xây dựng trên nền tảng **LangGraph**, **FastAPI** và **Qdrant**. Hệ thống tích hợp RAG (Retrieval-Augmented Generation) với khả năng tìm kiếm web thời gian thực để cung cấp câu trả lời chính xác và có ngữ cảnh. Dự án sử dụng quy trình tác vụ tự chủ (agentic workflow) với khả năng tự đánh giá và quyết định luồng xử lý thông tin.
@@ -51,7 +46,6 @@ graph TD
     
     Web --> Answer
     Answer --> End([Phản hồi cuối cùng])
-````
 
 ## Công nghệ sử dụng
 
