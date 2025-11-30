@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Knowledge Agent</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="material-icons-outlined logo-icon">smart_toy</span>
+                <h2>Research Agent</h2>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="section-label">
+                    <span>Knowledge Sources</span>
+                    <span class="badge" id="source-count">0</span>
+                </div>
+                
+                <div class="source-list" id="source-list">
+                    </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <input type="file" id="file-upload" accept=".pdf" hidden>
+                <button class="btn-primary full-width" onclick="document.getElementById('file-upload').click()">
+                    <span class="material-icons-outlined">upload_file</span>
+                    Upload PDF
+                </button>
+
+                <div class="setting-item">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="web-search-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="setting-label">Enable Web Search</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-info">
+                    <h1>Conversation</h1>
+                    <p>Ask questions based on your documents or the web.</p>
+                </div>
+            </header>
+
+            <div class="messages-container" id="chat-history">
+                <div class="message assistant">
+                    <div class="avatar"><span class="material-icons-outlined">smart_toy</span></div>
+                    <div class="message-content">
+                        <div class="markdown-body">
+                            <p>Hello! I'm ready. Select files from the left to focus my research, or just ask away!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="user-input" placeholder="Type your question here..." rows="1"></textarea>
+                    <button id="send-btn" disabled>
+                        <span class="material-icons-outlined">send</span>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <p>AI can make mistakes. Please verify important information.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
