@@ -46,3 +46,132 @@ graph TD
     
     Web --> Answer
     Answer --> End([Phản hồi cuối cùng])
+````
+
+## Công nghệ sử dụng
+
+**Backend**
+
+  - **Ngôn ngữ:** Python 3.10+
+  - **Framework:** FastAPI
+  - **Điều phối:** LangGraph, LangChain
+  - **LLM:** Google Gemini 1.5 Flash
+  - **Vector Database:** Qdrant (Cloud hoặc Local)
+  - **Công cụ tìm kiếm:** Tavily API
+  - **Embeddings:** HuggingFace (`sentence-transformers/all-MiniLM-L6-v2`)
+
+**Frontend**
+
+  - **Core:** HTML5, CSS3, Vanilla JavaScript
+  - **Hiển thị:** Custom CSS hỗ trợ Markdown (Marked.js, Highlight.js)
+
+## Yêu cầu tiên quyết
+
+Đảm bảo hệ thống đã cài đặt:
+
+  - Python 3.10 trở lên
+  - Git
+  - API Key cho các dịch vụ:
+      - Google AI Studio (Gemini)
+      - Tavily Search
+      - Qdrant (URL và API Key)
+
+## Cài đặt
+
+1.  **Clone dự án**
+
+    ```bash
+    git clone [https://github.com/username-cua-ban/LangGraph-Research-Agent.git](https://github.com/username-cua-ban/LangGraph-Research-Agent.git)
+    cd LangGraph-Research-Agent
+    ```
+
+2.  **Thiết lập môi trường ảo**
+
+    ```bash
+    python -m venv .venv
+
+    # Windows
+    .venv\Scripts\activate
+
+    # macOS/Linux
+    source .venv/bin/activate
+    ```
+
+3.  **Cài đặt thư viện phụ thuộc**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Cấu hình
+
+1.  Tạo file `.env` tại thư mục gốc của dự án.
+
+2.  Thêm các biến môi trường sau (thay thế bằng key thực tế của bạn):
+
+    ```ini
+    # Google Gemini
+    GOOGLE_API_KEY=your_google_api_key_here
+
+    # Qdrant Vector DB
+    QDRANT_URL=your_qdrant_url
+    QDRANT_API_KEY=your_qdrant_api_key
+    QDRANT_COLLECTION_NAME=langgraph-rag-collection
+
+    # Tavily Search
+    TAVILY_API_KEY=your_tavily_api_key_here
+
+    # Embedding Model (Tùy chọn)
+    EMBED_MODEL=sentence-transformers/all-MiniLM-L6-v2
+    ```
+
+3.  **Khởi tạo Index cơ sở dữ liệu**
+    Chạy script khởi tạo để thiết lập Qdrant collection và payload index cho tính năng lọc file:
+
+    ```bash
+    python backend/fix_qdrant_index.py
+    ```
+
+## Hướng dẫn sử dụng
+
+### 1\. Khởi chạy Backend Server
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+API sẽ hoạt động tại địa chỉ `http://localhost:8000`.
+
+### 2\. Khởi chạy Frontend
+
+Mở file `frontend_web/index.html` trong trình duyệt web.
+*Lưu ý: Để có trải nghiệm tốt nhất và tránh lỗi CORS, nên sử dụng Live Server (VS Code Extension).*
+
+### 3\. Quy trình sử dụng
+
+1.  **Tải lên:** Sử dụng thanh bên (sidebar) để tải lên các tài liệu PDF.
+2.  **Chọn nguồn:** Tích vào các ô bên cạnh tên file để yêu cầu Agent tập trung tìm kiếm trong các tài liệu đó.
+3.  **Hội thoại:** Nhập câu hỏi vào khung chat.
+      - Bật/Tắt "Enable Web Search" để cho phép Agent truy cập internet.
+      - Nhấn vào "Thinking Process" trong câu trả lời để xem các bước suy luận nội bộ.
+
+## Cấu trúc dự án
+
+```text
+LangGraph-Research-Agent/
+├── backend/
+│   ├── agent.py             # Logic các node và cạnh trong LangGraph
+│   ├── config.py            # Quản lý biến môi trường
+│   ├── main.py              # Các endpoint FastAPI và điểm vào ứng dụng
+│   ├── vectorstore.py       # Tương tác với Qdrant và logic phân mảnh (chunking)
+│   └── fix_qdrant_index.py  # Script khởi tạo cơ sở dữ liệu
+├── frontend_web/
+│   ├── index.html           # Giao diện người dùng chính
+│   ├── style.css            # Định dạng giao diện
+│   └── script.js            # Logic frontend và tích hợp API
+├── requirements.txt         # Các thư viện Python phụ thuộc
+└── README.md                # Tài liệu dự án
+```
+
+```
+```
